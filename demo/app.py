@@ -248,11 +248,11 @@ class TTSRequest(BaseModel):
 
 @app.get("/download/{filename}")
 async def download_file(filename: str):
-    file_path = os.path.join(INDIC_TTS_AUDIO_FILE_PATH, filename)
+    file_path = os.path.join(AUDIO_FILE_PATH, filename)
     if not os.path.isfile(file_path):
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(file_path, media_type="audio/wav", filename=filename)
-INDIC_TTS_AUDIO_FILE_PATH="static/audio"
+AUDIO_FILE_PATH="static/audio"
 ARABIC_BASE_URL = "http://localhost:4332"
 
 
@@ -276,7 +276,7 @@ async def text_to_speech(req: TTSRequest):
 
         unique_id = str(uuid.uuid4())
         filename = f"kokoro_{req.lang}_{unique_id}.wav"
-        output_path = os.path.join(INDIC_TTS_AUDIO_FILE_PATH, filename)
+        output_path = os.path.join(AUDIO_FILE_PATH, filename)
         sf.write(output_path, audio_np[0], samplerate=24000)
 
         download_url = f"{ARABIC_BASE_URL}/download/{filename}"

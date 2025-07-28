@@ -6,6 +6,13 @@ import os
 
 router = APIRouter()
 
+@router.get("/download/{filename}")
+def download_file(filename: str):
+    filepath = os.path.join("output", filename)
+    if os.path.exists(filepath):
+        return FileResponse(path=filepath, filename=filename, media_type="audio/wav")
+    raise HTTPException(status_code=404, detail="File not found")
+
 @router.post("/tts")
 async def synthesize_tts(request: TTSRequest):
     try:
