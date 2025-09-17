@@ -40,3 +40,7 @@ INDIC_PORT = int(os.getenv("INDIC_PORT",4545))
 INDIC_MODEL_PATH = config("INDIC_MODEL_PATH", cast=str, default="")
 
 BASE_URL = config("BASE_URL", cast=str, default="")
+
+INDIC_BASE_URL = config("INDIC_BASE_URL", cast=str, default="")
+KOKORO_BASE_URL = config("KOKORO_BASE_URL", cast=str, default="")
+TRANSLATOR_PATH = config("TRANSLATOR_PATH", cast=str, default="")

@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "soundFile": "/home/genai/Downloads/Projects/Kokoro/kokoro/output/a_835aaebf-f9e3-4a23-9e39-9621511c5bdc_rhubarb.wav",
+    "duration": 1.68
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.17, "value": "X" },
+    { "start": 0.17, "end": 0.22, "value": "F" },
+    { "start": 0.22, "end": 0.33, "value": "D" },
+    { "start": 0.33, "end": 1.03, "value": "B" },
+    { "start": 1.03, "end": 1.10, "value": "C" },
+    { "start": 1.10, "end": 1.38, "value": "B" },
+    { "start": 1.38, "end": 1.68, "value": "X" }
+  ]
+}

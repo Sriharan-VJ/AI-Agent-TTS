@@ -7,7 +7,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
 from transformers import AutoModel, AutoTokenizer
-from config.settings import AUDIO_FILE_PATH, INDIC_PORT, INDIC_MODEL_PATH, DEVICE, BASE_URL
+from services.lipsynk import generate_mouth_cues
+from config.settings import AUDIO_FILE_PATH, INDIC_PORT, INDIC_MODEL_PATH, DEVICE
 
 
 app = FastAPI(title="Indic Text To Speech")
@@ -20,6 +21,10 @@ class TTSRequest(BaseModel):
     text: str
     speaker_id: int = 16
     style_id: int = 16
+    
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Indic TTS API"}
 
 @app.get("/download/{filename}")
 def download_audio(filename: str):
@@ -48,9 +53,9 @@ def generate_tts(req: TTSRequest):
     filename = f"{uuid.uuid4()}.wav"
     audio_path = os.path.join(AUDIO_FILE_PATH, filename)
     sf.write(audio_path, waveform, model.config.sampling_rate)
-
-    download_url = f"{BASE_URL}:4545/download/{filename}"
-    return {"message": "TTS audio generated", "download_url": download_url}
+    #mouth_cues = generate_mouth_cues(audio_path)
+    download_url = f"/download/{filename}"
+    return {"message": "TTS audio generated", "audio_url": download_url, "mouth_cues": None}
 
 
 if __name__ == "__main__":

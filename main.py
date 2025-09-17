@@ -7,7 +7,7 @@ app = FastAPI(title="Kokoro Text To Speech")
 
 os.makedirs("output", exist_ok=True)
 
-app.include_router(router, prefix="/api", tags=["Kokoro"])
+app.include_router(router, tags=["Kokoro"])
 
 
 def main():

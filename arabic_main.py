@@ -40,6 +40,9 @@ class TTSRequest(BaseModel):
     lang: str
     text: str
     model_name: Optional[str] = None
+@app.get("/")
+def root():
+    return {"status": "Arabic-Thai TTS API is running"}
 
 
 @app.get("/download/{filename}")
@@ -82,7 +85,7 @@ async def text_to_speech(request: TTSRequest):
                 output_filename, output[0], samplerate=arabic_model.config.sampling_rate
             )
 
-            download_url = f"{ARABIC_BASE_URL}/download/ar_{unique_id}.mp3"
+            download_url = f"/download/ar_{unique_id}.mp3"
             return {"audio_url": download_url}
 
         elif request.lang == "th":
@@ -108,8 +111,8 @@ async def text_to_speech(request: TTSRequest):
                 output_filename, output[0], samplerate=arabic_model.config.sampling_rate
             )
 
-            download_url = f"{ARABIC_BASE_URL}/download/th_{unique_id}.mp3"
-            return {"audio_url": download_url}
+            download_url = "/download/th_{unique_id}.mp3"
+            return {"audio_url": download_url, "mouth_cues": None}
 
     except Exception as e:
         logging.error(f"Exception: {e}")

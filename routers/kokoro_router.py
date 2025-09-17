@@ -6,7 +6,13 @@ import os
 
 router = APIRouter()
 
+@router.get("/")
+def read_root():
+    return {"message": "Welcome to Kokoro TTS API"}
+
+
 @router.get("/download/{filename}")
+@router.head("/download/{filename}")
 def download_file(filename: str):
     filepath = os.path.join("output", filename)
     if os.path.exists(filepath):
@@ -15,7 +21,7 @@ def download_file(filename: str):
 
 @router.post("/tts")
 async def synthesize_tts(request: TTSRequest):
-    try:
+    try:         
         result = generate_tts_audio(
             text=request.text,
             voice=request.voice,
