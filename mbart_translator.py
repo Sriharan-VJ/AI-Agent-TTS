@@ -135,9 +135,9 @@ class T2TRequest(BaseModel):
     src_lang: str
     target_lang: str
 
-@app.get("/")
-def root():
-    return {"status": "Gemini Translator is running"}
+# @app.get("/")
+# def root():
+#     return {"status": "Gemini Translator is running"}
 
 async def transcribe_text_to_text(text: str, source_lang: str, target_lang: str):
     """
