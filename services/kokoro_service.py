@@ -267,10 +267,8 @@ def generate_tts_audio(text: str, voice: str, lang_code: str, speed: float):
     os.remove(temp_wav_path)
 
     print("Generate MouthCues with Rhubarb")
-    mouth_cues = []
 
     download_url = f"/download/{os.path.basename(final_mp3)}"
     return {
         "audio_url": download_url,
-        "mouth_cues": mouth_cues
     }

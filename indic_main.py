@@ -43,7 +43,7 @@ def download_audio(filename: str):
 @app.post("/tts")
 def generate_tts(req: TTSRequest):
     inputs = tokenizer(text=req.text, return_tensors="pt").to("cuda")
-
+    print("Received Text:", req.text)
     with torch.no_grad():
         outputs = model(
             inputs["input_ids"], speaker_id=req.speaker_id, emotion_id=req.style_id
